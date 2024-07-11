@@ -1,0 +1,40 @@
+# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# cffi generated files
+_*.c
+_*.so
+_*.o
+_*.hash
+
+# cache files
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# venv
+/.venv/
+
+# third party
+/third_party/
+
+# data
+/data/datasets/
+/data/dockstring/
+/data/chemical_space/*
+!/data/chemical_space/enaminebbUS.smi.gz
+!/data/chemical_space/hartenfeller.csv
+
+# models
+/models/
+
+# outputs
+/outputs/
+
+# weights & biases
+/wandb/

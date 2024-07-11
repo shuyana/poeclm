@@ -1,0 +1,100 @@
+[tool.poetry]
+name = "poeclm"
+version = "1.0.0"
+description = "Product-of-Experts Chemical Language Models"
+authors = ["Shuya Nakata <69258001+shuyana@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+cffi = "^1.16.0"
+datamol = "^0.12.4"
+dockstring = "^0.3.2"
+ipympl = "^0.9.3"
+ipywidgets = "^8.1.2"
+jupyterlab = "^4.1.6"
+kaleido = "^0.2.1,!=0.2.1.post1"
+matplotlib = "^3.8.4"
+matplotlib-venn = "^0.11.10"
+numpy = "^1.26.4"
+omegaconf = "^2.3.0"
+pandas = "^2.1.4,<2.2.0"  # https://github.com/rdkit/rdkit/pull/7226
+plotly = "^5.20.0"
+pyarrow = "^15.0.2"
+pygmo = "^2.19.5"
+rd-filters = {git = "https://github.com/PatWalters/rd_filters.git"}
+rdkit = "^2023.9.5"
+scipy = "^1.13.0"
+seaborn = "^0.13.2"
+torch = "^2.2.2"
+tqdm = "^4.66.2"
+wandb = "^0.16.6"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.9.0"
+pytest = "^8.1.1"
+ruff = "^0.3.5"
+
+[tool.mypy]
+python_version = "3.11"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:rdkit.Chem.MolStandardize",  # https://github.com/rdkit/rdkit/pull/6819
+    "ignore::DeprecationWarning:jupyter_client.connect",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+
+[tool.ruff.lint]
+select = [
+    "F",  # pyflakes
+    "E",  # pycodestyle
+    "W",  # pycodestyle warnings
+    "I",  # isort
+    "D",  # pydocstyle
+    "UP",  # pyupgrade
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    "PD",  # pandas-vet
+    "NPY",  # numpy-specific rules
+]
+ignore = [
+    "E731",  # pycodestyle: lambda-assignment
+    "PD901",  # pandas-vet: pandas-df-variable-name
+    "NPY002",  # numpy-specific rules: numpy-legacy-random
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "D",  # pydocstyle
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["poeclm"]
+known-third-party = ["wandb"]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 72
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[build-system]
+requires = ["poetry-core>=1.5.1"]
+build-backend = "poetry.core.masonry.api"
